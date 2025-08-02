@@ -36,8 +36,8 @@ impl MorphingString {
         self.progress()
     }
 
-    pub fn value(&self) -> String {
-        self.current_value.clone()
+    pub fn value(&self) -> &String {
+        &self.current_value
     }
 
     pub fn progress(&self) -> Progress {
