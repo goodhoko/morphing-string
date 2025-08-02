@@ -28,14 +28,12 @@ impl MorphingString {
         self.target = target;
     }
 
-    pub fn advance(&mut self) -> String {
-        let Some(edit) = self.remaining_edits.pop_front() else {
-            // All edits applied. We must have reached target.
-            return self.target.clone();
+    pub fn advance(&mut self) -> Progress {
+        if let Some(edit) = self.remaining_edits.pop_front() {
+            self.current_value = edit.apply(&self.current_value);
         };
 
-        self.current_value = edit.apply(&self.current_value);
-        self.current_value.clone()
+        self.progress()
     }
 
     pub fn get_value(&self) -> String {
