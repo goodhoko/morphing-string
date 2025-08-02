@@ -42,10 +42,10 @@ fn main() {
     loop {
         let next_line = lines.next().expect("non-empty LINES cycled()d endlessly");
         line.set_target(next_line);
-        clear_and_print(&line.get_value(), &mut out).unwrap();
+        clear_and_print(&line.value(), &mut out).unwrap();
 
         while !line.advance().is_complete() {
-            clear_and_print(&line.get_value(), &mut out).unwrap();
+            clear_and_print(&line.value(), &mut out).unwrap();
             sleep(MORPH_STEP_DURATION);
         }
 

@@ -36,7 +36,7 @@ impl MorphingString {
         self.progress()
     }
 
-    pub fn get_value(&self) -> String {
+    pub fn value(&self) -> String {
         self.current_value.clone()
     }
 
@@ -73,6 +73,6 @@ mod tests {
             string.advance();
         }
 
-        assert_eq!(string.get_value(), "1234");
+        assert_eq!(string.value(), "1234");
     }
 }
