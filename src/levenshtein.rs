@@ -104,7 +104,7 @@ pub fn compute_edit_sequence(start: &str, target: &str) -> VecDeque<Edit> {
         edits.push_front(edit);
     }
 
-    // The Edits' indexes does not account for shifts caused by previously applied Inserts or
+    // The Edits' indexes don't account for shifts caused by previously applied Inserts or
     // Deletions. Correct for that.
     let mut shift = 0i64;
     for edit in edits.iter_mut() {
