@@ -31,7 +31,8 @@ const LINES: &[&str] = &[
     "",
 ];
 
-const MORPH_STEP_DURATION: Duration = Duration::from_millis(20);
+// Do roughly one edit per frame at 60FPS to minimize stutter.
+const MORPH_STEP_DURATION: Duration = Duration::from_millis(17);
 const LINE_STEP_DURATION: Duration = Duration::from_secs(2);
 
 fn main() {
