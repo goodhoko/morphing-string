@@ -49,6 +49,7 @@ fn main() {
             sleep(MORPH_STEP_DURATION);
         }
 
+        clear_and_print(line.value(), &mut out).unwrap();
         sleep(LINE_STEP_DURATION);
     }
 }
