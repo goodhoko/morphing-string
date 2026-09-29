@@ -7,7 +7,6 @@ use std::{
 use crossterm::{ExecutableCommand, cursor, terminal};
 use morphing_string::MorphingString;
 
-// A poem by Refaat Alareer. https://ifimustdie.net/
 const LINES: &[&str] = &[
     "If I must die,",
     "you must live",
@@ -28,6 +27,8 @@ const LINES: &[&str] = &[
     "If I must die",
     "let it bring hope",
     "let it be a tale",
+    "",
+    "A poem by Refaat Alareer. https://ifimustdie.net/",
     "",
 ];
 
