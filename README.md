@@ -30,7 +30,7 @@ far along the morph is. Each call does a constant amount of work, independent of
 how different the two strings are, so you can advance on whatever cadence suits
 your app — one edit per frame, or a burst per tick.
 
-[`advance`] is a no-op once the morph completes, so a loop of the form
+`advance()` is a no-op once the morph completes, so a loop of the form
 `while !string.advance().is_complete()` is safe to run to exhaustion.
 
 ## Example
