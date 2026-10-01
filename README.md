@@ -46,4 +46,4 @@ cargo run --example tui_poem
 
 ## License
 
-Licensed under [the fuck around and find out license v0.1][https://owly.fans/license/fafol/].
+Licensed under [the fuck around and find out license v0.1](https://owly.fans/license/fafol/).
