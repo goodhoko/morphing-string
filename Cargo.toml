@@ -2,8 +2,13 @@
 name = "morphing-string"
 version = "0.1.0"
 edition = "2024"
-
-[dependencies]
+rust-version = "1.85"
+description = "Morph one string into another, one edit at a time."
+license-file = "LICENSE"
+repository = "https://github.com/goodhoko/morphing-string"
+readme = "README.md"
+keywords = ["text", "morphing", "levenshtein", "animation", "tui"]
+categories = ["text-processing", "visualization"]
 
 [dev-dependencies]
 crossterm = "0.29"

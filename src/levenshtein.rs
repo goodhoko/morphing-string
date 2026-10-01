@@ -14,14 +14,13 @@ pub fn compute_edit_sequence(start: &str, target: &str) -> VecDeque<Edit> {
     // start[0..i] to prefix of target[0..j].
     let mut dp = vec![vec![0; target_len + 1]; start_len + 1];
 
-    #[expect(clippy::needless_range_loop)]
-    for i in 1..=start_len {
+    for (i, row) in dp.iter_mut().enumerate() {
         // Converting string of length i to an empty string takes i deletions.
-        dp[i][0] = i;
+        row[0] = i;
     }
-    for j in 1..=target_len {
+    for (j, cell) in dp[0].iter_mut().enumerate() {
         // Converting an empty string into a string of length j takes j insertions.
-        dp[0][j] = j;
+        *cell = j;
     }
 
     for i in 1..=start_len {

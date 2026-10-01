@@ -1,3 +1,5 @@
+#![allow(missing_docs)]
+
 use std::{
     io::{self, Stdout, Write, stdout},
     thread::sleep,
@@ -38,12 +40,12 @@ const LINE_STEP_DURATION: Duration = Duration::from_secs(2);
 
 fn main() {
     let mut out = stdout();
-    let mut lines = LINES.iter().map(|line| line.to_string()).cycle();
-    let mut line = MorphingString::new("".to_string());
+    let mut lines = LINES.iter().cycle();
+    let mut line = MorphingString::new("");
 
     loop {
         let next_line = lines.next().expect("non-empty LINES cycled()d endlessly");
-        line.set_target(next_line);
+        line.set_target(*next_line);
         clear_and_print(line.value(), &mut out).unwrap();
 
         while !line.advance().is_complete() {
@@ -56,7 +58,7 @@ fn main() {
     }
 }
 
-fn clear_and_print(line: &String, out: &mut Stdout) -> io::Result<()> {
+fn clear_and_print(line: &str, out: &mut Stdout) -> io::Result<()> {
     out.execute(cursor::MoveToColumn(0))?;
     out.execute(terminal::Clear(terminal::ClearType::CurrentLine))?;
 

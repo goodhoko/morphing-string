@@ -21,7 +21,7 @@ impl Edit {
             }
         }
 
-        String::from_iter(chars.iter())
+        String::from_iter(chars)
     }
 }
 
