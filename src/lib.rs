@@ -37,6 +37,11 @@
 //! cargo run --example tui_poem
 //! ```
 //!
+//! The same poem but as a GUI. Source for the gif in readme.
+//! ```sh
+//! cargo run --example gui_poem
+//! ```
+//!
 //! # License
 //!
 //! Licensed under the fuck around and find out license v0.1. It is not an

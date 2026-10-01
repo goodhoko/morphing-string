@@ -7,6 +7,10 @@ insertions, deletions, and substitutions — that turns one string into another,
 then applies them one per call. Driving it from a render loop gives you a
 text-morphing effect:
 
+![demo gif](./demo.gif)
+
+## Usage
+
 ```rust
 use morphing_string::MorphingString;
 
@@ -20,8 +24,6 @@ while !string.progress().is_complete() {
 
 assert_eq!(string.value(), "mittens");
 ```
-
-## Usage
 
 Call `advance()` to apply one edit and get back a `Progress` telling you how
 far along the morph is. Each call does a constant amount of work, independent of
@@ -37,6 +39,12 @@ A terminal demo that morphs between lines of a poem, one edit per frame:
 
 ```sh
 cargo run --example tui_poem
+```
+
+The same poem but in a GUI. Source of the demo gif in readme.
+
+```sh
+cargo run --example gui_poem
 ```
 
 ## Notes
