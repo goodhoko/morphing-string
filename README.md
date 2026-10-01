@@ -43,6 +43,9 @@ cargo run --example tui_poem
 
 - Zero runtime dependencies.
 - Operates on `char`s, so multi-byte UTF-8 is handled correctly.
+- Where the shortest sequence of edits is ambiguous, substitutions are
+  preferred over insertions, and insertions over deletions, which keeps
+  unchanged characters in place for as long as possible.
 
 ## License
 

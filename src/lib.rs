@@ -23,6 +23,12 @@
 //! of how different the two strings are, so the morph can be advanced on any
 //! cadence the caller likes. Advancing is a no-op once the morph is complete.
 //!
+//! Where the shortest sequence of edits is ambiguous, substitutions are
+//! preferred over insertions, and insertions over deletions. That keeps
+//! characters which don't change in place for as long as possible, at the cost
+//! of preferring substitutions to insertions in the middle of a run of new
+//! characters.
+//!
 //! # Example
 //!
 //! A terminal demo that morphs between lines of a poem:
@@ -37,12 +43,12 @@
 //! OSI-approved or SPDX-identified license, so this crate carries no license
 //! badge on crates.io. See the `LICENSE` file for the full text.
 
+mod edit;
+mod levenshtein;
+
 use std::collections::VecDeque;
 
 use crate::{edit::Edit, levenshtein::compute_edit_sequence};
-
-mod edit;
-mod levenshtein;
 
 /// A string that morphs into a target string one edit at a time.
 ///
@@ -98,7 +104,7 @@ impl MorphingString {
     pub fn advance(&mut self) -> Progress {
         if let Some(edit) = self.remaining_edits.pop_front() {
             self.current_value = edit.apply(&self.current_value);
-        };
+        }
 
         self.progress()
     }

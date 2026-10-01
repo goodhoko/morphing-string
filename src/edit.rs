@@ -6,18 +6,18 @@ pub(crate) enum Edit {
 }
 
 impl Edit {
-    pub fn apply(&self, string: &str) -> String {
+    pub fn apply(self, string: &str) -> String {
         let mut chars: Vec<char> = string.chars().collect();
 
         match self {
             Edit::Insert { c, index } => {
-                chars.insert(*index, *c);
+                chars.insert(index, c);
             }
             Edit::Delete { index } => {
-                chars.remove(*index);
+                chars.remove(index);
             }
             Edit::Substitute { c, index } => {
-                chars[*index] = *c;
+                chars[index] = c;
             }
         }
 

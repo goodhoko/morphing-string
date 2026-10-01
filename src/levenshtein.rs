@@ -4,7 +4,7 @@ use crate::edit::Edit;
 
 /// Compute a sequence of [`Edit`]s that when applied onto `start` will turn it into `target`.
 /// The Edits have to be applied front to back.
-pub fn compute_edit_sequence(start: &str, target: &str) -> VecDeque<Edit> {
+pub(crate) fn compute_edit_sequence(start: &str, target: &str) -> VecDeque<Edit> {
     let start_chars: Vec<char> = start.chars().collect();
     let target_chars: Vec<char> = target.chars().collect();
     let start_len = start_chars.len();
@@ -63,28 +63,27 @@ pub fn compute_edit_sequence(start: &str, target: &str) -> VecDeque<Edit> {
             continue;
         } else {
             // chars are not equal and we have the choice of choosing any Edit. Choose the one that
-            // moves us to a position in the matrix that has the lowest Levenshtein distance.
-            [
-                (
-                    dp[i - 1][j - 1],
-                    Edit::Substitute {
-                        c: target_chars[j - 1],
-                        index: i - 1,
-                    },
-                ),
-                (
-                    dp[i][j - 1],
-                    Edit::Insert {
-                        c: target_chars[j - 1],
-                        index: i,
-                    },
-                ),
-                (dp[i - 1][j], Edit::Delete { index: i - 1 }),
-            ]
-            .iter()
-            .min_by_key(|(distance, _)| distance)
-            .expect("this is a non-empty list")
-            .1
+            // moves us to a position in the matrix that has the lowest Levenshtein distance, breaking
+            // ties in favour of the first Edit listed below.
+            let substitution_distance = dp[i - 1][j - 1];
+            let insertion_distance = dp[i][j - 1];
+            let deletion_distance = dp[i - 1][j];
+
+            if substitution_distance <= insertion_distance
+                && substitution_distance <= deletion_distance
+            {
+                Edit::Substitute {
+                    c: target_chars[j - 1],
+                    index: i - 1,
+                }
+            } else if insertion_distance <= deletion_distance {
+                Edit::Insert {
+                    c: target_chars[j - 1],
+                    index: i,
+                }
+            } else {
+                Edit::Delete { index: i - 1 }
+            }
         };
 
         match edit {
