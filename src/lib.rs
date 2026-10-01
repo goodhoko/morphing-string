@@ -49,6 +49,7 @@ mod levenshtein;
 /// Created with an initial value, pointed at a target with
 /// [`set_target`](Self::set_target), then advanced with
 /// [`advance`](Self::advance) until [`Progress::is_complete`] returns `true`.
+#[derive(Clone, Debug)]
 pub struct MorphingString {
     current_value: String,
     remaining_edits: VecDeque<Edit>,
