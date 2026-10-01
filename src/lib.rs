@@ -46,7 +46,8 @@ mod levenshtein;
 
 /// A string that morphs into a target string one edit at a time.
 ///
-/// Created with an initial value, pointed at a target with
+/// Created with an initial value by [`new`](Self::new) or
+/// [`with_target`](Self::with_target), pointed at a target with
 /// [`set_target`](Self::set_target), then advanced with
 /// [`advance`](Self::advance) until [`Progress::is_complete`] returns `true`.
 #[derive(Clone, Debug)]
@@ -67,6 +68,16 @@ impl MorphingString {
             remaining_edits: VecDeque::new(),
             total_edits: 0,
         }
+    }
+
+    /// Creates a `MorphingString` that is already pointed at a target.
+    ///
+    /// Shorthand for [`new`](Self::new) followed immediately by
+    /// [`set_target`](Self::set_target).
+    pub fn with_target(value: impl Into<String>, target: impl Into<String>) -> Self {
+        let mut string = Self::new(value);
+        string.set_target(target);
+        string
     }
 
     /// Sets the string to morph into, recomputing the sequence of edits.
