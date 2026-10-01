@@ -11,8 +11,9 @@
 //! let mut string = MorphingString::new("kitten");
 //! string.set_target("mittens");
 //!
-//! while !string.advance().is_complete() {
+//! while !string.progress().is_complete() {
 //!     println!("{}", string.value());
+//!     string.advance();
 //! }
 //!
 //! assert_eq!(string.value(), "mittens");
